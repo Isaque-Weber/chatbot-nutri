@@ -1,176 +1,53 @@
-# 👨🏻‍💻     Isaque Weber
+# Chatbot Nutri
 
-**`Desenvolvedor FullStack`**
+Bem-vindo ao projeto Chatbot Nutri! Este projeto tem como objetivo desenvolver um chatbot que fornece dicas e informações nutricionais para ajudar as pessoas a manterem uma alimentação saudável.
 
-Me chamo Isaque Weber de Souza Oliveira, tenho 29 anos e sou natural do Rio de Janeiro. Concluí o ensino médio no CE Erich Walter Heine, com o curso técnico em administração. Atualmente, estou cursando Análise e Desenvolvimento de Sistemas na UniAmérica. Sou apaixonado por tecnologia e estou sempre em busca de novos conhecimentos e desafios na área de desenvolvimento de software. Tenho experiência com diversas linguagens e tecnologias, como HTML, CSS, JavaScript, TypeScript, Angular, Node.js, SASS, Python, github, JQuery, Laravel, Git e Docker. Estou sempre disposto a aprender e colaborar em projetos inovadores.
+## Funcionalidades
 
-<p align="left">
-    <a href="https://www.linkedin.com/in/isaqueweber/">
-        <img 
-            alt="LinkedIn" 
-            title="Conecte-se comigo no LinkedIn" 
-            src="https://custom-icon-badges.demolab.com/badge/-LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white"
-        />
-    </a>
-    <a href="https://www.isaqueweber.com.br">
-        <img 
-            alt="Meu Site" 
-            title="Visite meu portfólio" 
-            src="https://custom-icon-badges.demolab.com/badge/-Meu%20Portfólio-000?style=for-the-badge&logo=web&logoColor=white"
-        />
-    </a>
-    <a href="https://github.com/isaqueweber?tab=repositories">
-        <img 
-            alt="Projetos" 
-            title="Meus projetos no GitHub" 
-            src="https://custom-icon-badges.demolab.com/badge/-Projetos-000?style=for-the-badge&logo=github&logoColor=white"
-        />
-    </a>
-</p>
+- Responder perguntas sobre nutrição
+- Fornecer dicas de alimentação saudável
+- Sugerir receitas baseadas em preferências alimentares
+- Acompanhar o consumo diário de nutrientes
 
----
+## Tecnologias Utilizadas
 
-### 🤖 Linguagens e Tecnologias
+- Python
+- Natural Language Processing (NLP)
+- Flask (para a API)
+- Banco de dados SQLite
 
-<img 
-    align="left" 
-    alt="HTML"
-    title="HTML" 
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" 
-/>
-<img 
-    align="left" 
-    alt="CSS" 
-    title="CSS"
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" 
-/>
-<img 
-    align="left" 
-    alt="JavaScript" 
-    title="JavaScript"
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" 
-/>
-<img 
-    align="left" 
-    alt="TypeScript"
-    title="TypeScript" 
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" 
-/>
-<img 
-    align="left" 
-    alt="Angular"
-    title="Angular" 
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg" 
-/>
-<img 
-    align="left" 
-    alt="Node.js"
-    title="Node.js" 
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" 
-/>
-<img 
-    align="left" 
-    alt="SASS" 
-    title="SASS"
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg" 
-/>
-<img 
-    align="left" 
-    alt="Python" 
-    title="Python"
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" 
-/>
-<img 
-    align="left" 
-    alt="GitHub" 
-    title="GitHub"
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" 
-/>
-<img 
-    align="left" 
-    alt="JQuery" 
-    title="JQuery"
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jquery/jquery-original.svg" 
-/>
-<img 
-    align="left" 
-    alt="Laravel" 
-    title="Laravel"
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" 
-/>
-<img 
-    align="left" 
-    alt="SQL" 
-    title="SQL"
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" 
-/>
-<img 
-    align="left" 
-    alt="Next.js" 
-    title="Next.js"
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" 
-/>
-<img 
-    align="left" 
-    alt="Git" 
-    title="Git"
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" 
-/>
-<img 
-    align="left" 
-    alt="Docker" 
-    title="Docker"
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" 
-/>
-<br/>
-<br/>
+## Como Executar o Projeto
 
-### 📊 Estatísticas
+1. Clone o repositório:
+    ```bash
+    git clone https://github.com/seu-usuario/chatbot-nutri.git
+    ```
+2. Navegue até o diretório do projeto:
+    ```bash
+    cd chatbot-nutri
+    ```
+3. Crie um ambiente virtual e ative-o:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # No Windows use `venv\Scripts\activate`
+    ```
+4. Instale as dependências:
+    ```bash
+    pip install -r requirements.txt
+    ```
+5. Execute a aplicação:
+    ```bash
+    python app.py
+    ```
 
-<p>
-  <img 
-    align="left" 
-    alt="GitHub Stats" 
-    height="200" 
-    style="padding-right: 10px;" 
-    src="https://github-readme-stats.vercel.app/api?username=Isaque-Weber&show_icons=true&theme=tokyonight&include_all_commits=true&locale=pt-br" 
-  />
+## Contribuição
 
-<img 
-      align="left" 
-      alt="GitHub Stats" 
-      height="200" 
-      src="https://github-readme-stats.vercel.app/api/top-langs/?username=Isaque-Weber&theme=tokyonight&layout=compact&custom_title=Tecnologias&langs_count=9" 
-  />
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
 
-</p>
+## Licença
+
+Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## Contato
+
+Para mais informações, entre em contato pelo email: seu-email@exemplo.com
