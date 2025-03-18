@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface de Atendimento via WhatsApp</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #075e54;
+            color: white;
+            padding: 20px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .menu-button {
+            background-color: #128c7e;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        .menu-button:hover {
+            background-color: #0d7066;
+        }
+        .chat-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #e5ddd5;
+        }
+        .chat-header {
+            background-color: #ededed;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+        .client-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .client-info {
+            flex-grow: 1;
+        }
+        .client-name {
+            font-weight: bold;
+            margin: 0;
+        }
+        .client-status {
+            font-size: 12px;
+            color: #666;
+            margin: 0;
+        }
+        .chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .message {
+            margin-bottom: 10px;
+            max-width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            position: relative;
+        }
+        .received {
+            background-color: white;
+            align-self: flex-start;
+        }
+        .sent {
+            background-color: #dcf8c6;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        .message-time {
+            font-size: 10px;
+            color: #999;
+            text-align: right;
+            margin-top: 5px;
+        }
+        .chat-input {
+            background-color: #f0f0f0;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .chat-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+        }
+        .send-button {
+            background-color: #128c7e;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <h2>Atendimento</h2>
+            </div>
+            <div class="menu">
+                <button class="menu-button">Botão 1</button>
+                <button class="menu-button">Botão 2</button>
+                <button class="menu-button">Botão 3</button>
+                <button class="menu-button">Botão 4</button>
+                <button class="menu-button">Botão 5</button>
+            </div>
+        </div>
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="client-avatar">C</div>
+                <div class="client-info">
+                    <p class="client-name">Cliente</p>
+                    <p class="client-status">Online <span class="status-indicator"></span></p>
+                </div>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input">
+                <input type="text" id="user_input" placeholder="Digite sua pergunta...">
+                <button class="send-button" onclick="sendMessage()">➤</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <script>
+        async function sendMessage() {
+            const inputField = document.getElementById("user_input");
+            const chatMessages = document.getElementById("chat-messages");
+            const userInput = inputField.value.trim();
+            
+            if (!userInput) return;
+
+            // Exibir mensagem do usuário
+            const userMessageDiv = document.createElement("div");
+            userMessageDiv.className = "message sent";
+            userMessageDiv.innerHTML = userInput;
+            chatMessages.appendChild(userMessageDiv);
+
+            // Limpar campo de input
+            inputField.value = "";
+
+            // Enviar mensagem ao backend
+            try {
+                const response = await fetch("/consultar/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ pergunta: userInput })
+                });
+
+                const data = await response.json();
+
+                // Converter Markdown para HTML
+                const respostaHTML = marked.parse(data.resposta);
+
+                // Exibir resposta do bot
+                const botMessageDiv = document.createElement("div");
+                botMessageDiv.className = "message received";
+                botMessageDiv.innerHTML = respostaHTML;
+                chatMessages.appendChild(botMessageDiv);
+            } catch (error) {
+                console.error("Erro ao enviar mensagem:", error);
+            }
+
+            // Rolar para o final
+            setTimeout(() => {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 100);
+        }
+    </script>
+
+    <!-- <script>
+        async function sendMessage() {
+            const userInput = document.getElementById("user_input").value;
+            if (!userInput.trim()) return;
+
+            // Mostrar a mensagem do usuário
+            const messagesDiv = document.getElementById("messages");
+            const userMessageDiv = document.createElement("div");
+            userMessageDiv.classList.add("user-message");
+            userMessageDiv.textContent = userInput;
+            messagesDiv.appendChild(userMessageDiv);
+
+            // Limpar o campo de input
+            document.getElementById("user_input").value = "";
+
+            // Enviar a pergunta para o backend
+            const response = await fetch("/consultar/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ pergunta: userInput })
+            });
+
+            const data = await response.json();
+
+            // Converter a resposta de Markdown para HTML
+            const respostaHTML = marked.parse(data.resposta);
+
+            // Mostrar a resposta do bot
+            const botMessageDiv = document.createElement("div");
+            botMessageDiv.classList.add("bot-message");
+            botMessageDiv.innerHTML = respostaHTML; // Usando innerHTML para permitir a exibição do HTML gerado
+            messagesDiv.appendChild(botMessageDiv);
+
+            // Garante que a rolagem aconteça após a renderização da nova mensagem
+            setTimeout(() => {
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }, 100);
+        }
+    </script> -->
+</body>
+</html>
