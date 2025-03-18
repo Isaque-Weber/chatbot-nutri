@@ -31,8 +31,9 @@ async def consultar_alimento(request: ConsultaRequest, db: Session = Depends(get
     # Verifica se o usuário está autorizado
     usuario = db.query(Usuario).filter(Usuario.telefone == "11999999999").first()  # 📌 Ajuste para pegar o telefone real
 
-    if not usuario or not usuario.autorizado:
-        return {"erro": "Usuário não autorizado para acessar o chatbot."}
+    # if not usuario or not usuario.autorizado:
+    
+    #     return {"erro": "Usuário não autorizado para acessar o chatbot."}
 
     assistant_id = 'asst_6FrcxlrCjmX5P4ovOIU2Fcwv'
     pergunta = request.pergunta
