@@ -1,0 +1,23 @@
+<!-- templates/dashboard.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <!-- Link para CSS (WhatsApp-like) -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Dashboard do Chatbot</h1>
+  </header>
+
+  <main class="content">
+    <p>Total de Usuários: {{ total_users }}</p>
+    <p>Total de Sessões: {{ total_sessions }}</p>
+    <p>Total de Mensagens: {{ total_messages }}</p>
+    <nav>
+      <a href="/admin/usuarios">Gerenciar Usuários</a>
+    </nav>
+  </main>
+</body>
+</html>

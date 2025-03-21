@@ -8,3 +8,4 @@ class Usuario(Base):
     nome = Column(String, index=True)
     telefone = Column(String, unique=True, index=True)
     autorizado = Column(Integer, default=0)  # 0 para não autorizado, 1 para autorizado
+    has_comorbidity = Column(Integer, default=0)  # 0 para não tem comorbidade, 1 para tem

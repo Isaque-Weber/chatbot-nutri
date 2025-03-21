@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Usuário</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Editar Usuário</h1>
+  </header>
+  <main>
+    <!-- Ação POST para /admin/usuarios/editar -->
+    <form action="/admin/usuarios/editar" method="post">
+      <input type="hidden" name="id" value="{{ usuario.id }}">
+
+      <label for="nome">Nome:</label>
+      <input type="text" name="nome" id="nome" value="{{ usuario.nome }}">
+
+      <label for="telefone">Telefone:</label>
+      <input type="text" name="telefone" id="telefone" value="{{ usuario.telefone }}">
+
+      <label for="has_comorbidity">Possui Comorbidade?</label>
+      <select name="has_comorbidity" id="has_comorbidity">
+        <option value="0" {% if usuario.has_comorbidity == 0 %}selected{% endif %}>Não</option>
+        <option value="1" {% if usuario.has_comorbidity == 1 %}selected{% endif %}>Sim</option>
+      </select>
+
+      <label for="autorizado">Está autorizado?</label>
+      <select name="autorizado" id="autorizado">
+        <option value="0" {% if usuario.autorizado == 0 %}selected{% endif %}>Não</option>
+        <option value="1" {% if usuario.autorizado == 1 %}selected{% endif %}>Sim</option>
+      </select>
+
+      <button type="submit">Salvar</button>
+    </form>
+  </main>
+</body>
+</html>

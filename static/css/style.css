@@ -1,0 +1,142 @@
+/* WhatsApp-like colors */
+:root {
+    --wa-green: #075E54;
+    --wa-light-green: #25D366;
+    --wa-background: #ECE5DD;
+    --wa-text: #262626;
+}
+  
+  /* Reset básico */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+/* 
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #e5ddd5;
+    margin: 0;
+    padding: 0;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.chat-header {
+    background-color: #075e54;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #e5ddd5;
+}
+
+.message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 80%;
+}
+
+.message.sent {
+    background-color: #dcf8c6;
+    align-self: flex-end;
+}
+
+.message.received {
+    background-color: #fff;
+    align-self: flex-start;
+}
+
+.chat-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    background-color: #f0f0f0;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.chat-input button {
+    background-color: #075e54;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background-color: #064e48;
+} */
+
+
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: var(--wa-background);
+    color: var(--wa-text);
+  }
+  
+  .header {
+    background-color: var(--wa-green);
+    color: #fff;
+    padding: 1rem;
+  }
+  
+  .content {
+    padding: 1rem;
+  }
+  
+  /* Exemplo de tabela simples */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  table th, table td {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+  }
+  
+  table th {
+    background-color: var(--wa-green);
+    color: #fff;
+  }
+  
+  button {
+    background-color: var(--wa-green);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: var(--wa-light-green);
+  }
+  

@@ -188,29 +188,43 @@
             const userInput = inputField.value.trim();
             
             if (!userInput) return;
-    
+        
             // Exibir mensagem do usuário
             const userMessageDiv = document.createElement("div");
             userMessageDiv.className = "message sent";
             userMessageDiv.innerHTML = userInput;
             chatMessages.appendChild(userMessageDiv);
-    
+        
             // Limpar campo de input
             inputField.value = "";
-    
+        
+            // Número de telefone fictício
+            const numeroTelefone = "+5511999999999";  // Simulação de número autorizado
+        
+            // Mostra no console o que será enviado
+            console.log("Enviando JSON:", JSON.stringify({ telefone: numeroTelefone, pergunta: userInput }));
+            
             // Enviar mensagem ao backend
             try {
                 const response = await fetch("/consultar", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ pergunta: userInput })
+                    body: JSON.stringify({ 
+                        telefone: numeroTelefone, 
+                        pergunta: userInput 
+                    })
                 });
-    
+        
                 const data = await response.json();
-    
+        
+                if (data.erro) {
+                    alert(data.erro);  // Mostra erro se usuário não for autorizado
+                    return;
+                }
+        
                 // Converter Markdown para HTML
                 const respostaHTML = marked.parse(data.resposta);
-    
+        
                 // Exibir resposta do bot
                 const botMessageDiv = document.createElement("div");
                 botMessageDiv.className = "message received";
@@ -219,12 +233,13 @@
             } catch (error) {
                 console.error("Erro ao enviar mensagem:", error);
             }
-    
+        
             // Rolar para o final
             setTimeout(() => {
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             }, 100);
         }
+        
     </script>    
 
     <!-- <script>

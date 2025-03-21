@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadastrar Usuário</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Novo Usuário</h1>
+    </header>
+    <main class="content">
+        <form action="/admin/usuarios/cadastrar" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome" required>
+
+        <label for="telefone">Telefone:</label>
+        <input type="text" name="telefone" id="telefone" required>
+        
+        <label for="has_comorbidity">Possui Comorbidade?</label>
+        <select name="has_comorbidity" id="has_comorbidity">
+            <option value="0">Não</option>
+            <option value="1">Sim</option>
+        </select>
+        <label for="autorizado">Está autorizado?</label>
+        <select name="autorizado" id="autorizado">
+            <option value="0">Não</option>
+            <option value="1">Sim</option>
+        </select>
+        <button type="submit">Cadastrar</button>
+        </form>
+    </main>
+</body>
+</html>

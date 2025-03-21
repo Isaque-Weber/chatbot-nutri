@@ -1,4 +1,5 @@
 import markdown2
+from pydantic import BaseModel
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from backend.services.taco_retrieval import process_pdf_and_create_assistant, query_assistant
@@ -12,13 +13,19 @@ router = APIRouter()
 
 # Modelo para a consulta
 class ConsultaRequest(BaseModel):
+    telefone: str
     pergunta: str
+    def normalizar_telefone(self):
+        return self.telefone.replace("+", "").strip()
 
 class VerificacaoRequest(BaseModel):
     telefone: str
 
 # Inicializa o Assistant apenas uma vez (ao iniciar o servidor)
 assistant = process_pdf_and_create_assistant("./backend/data/taco.pdf")
+
+usuarios_autorizados = {"5511999999999", "+5511999999999"}
+
 
 # Função para recuperar as últimas interações do banco de dados
 def get_last_messages(db: Session, limit=5):
@@ -29,27 +36,48 @@ def get_last_messages(db: Session, limit=5):
 @router.post("/consultar")
 async def consultar_alimento(request: ConsultaRequest, db: Session = Depends(get_db)):
     # Verifica se o usuário está autorizado
-    usuario = db.query(Usuario).filter(Usuario.telefone == "11999999999").first()  # 📌 Ajuste para pegar o telefone real
+    usuario = db.query(Usuario).filter(Usuario.telefone == "+5511999999999").first()  # 📌 Ajuste para pegar o telefone real
 
-    # if not usuario or not usuario.autorizado:
+    telefone_normalizado = request.normalizar_telefone()
+    print("Número recebido:", request.telefone)  # Debugging
+
+
+    if telefone_normalizado not in usuarios_autorizados:
+        print(f"Usuário {telefone_normalizado} não autorizado!")
+        return {"erro": f"Usuário {telefone_normalizado} não autorizado para acessar o chatbot."}
+
+    print(f"Usuário {telefone_normalizado} autorizado!")
+    # 2) Captura se ele tem comorbidade
+    possui_comorbidade = (usuario.has_comorbidity == 1)
     
-    #     return {"erro": "Usuário não autorizado para acessar o chatbot."}
+    # 3) Monta instruções extras se tiver comorbidade
+    if possui_comorbidade:
+        extra_contexto = (
+            "ATENÇÃO: Este usuário possui uma comorbidade. "
+            "Fornecer orientações alimentares mais cautelosas, "
+            "considerando possíveis restrições nutricionais."
+        )
+    else:
+        extra_contexto = ""
 
-    assistant_id = 'asst_6FrcxlrCjmX5P4ovOIU2Fcwv'
+    
     pergunta = request.pergunta
 
-    # 🔄 Recupera as últimas mensagens para o contexto
+    # 4) Recupera histórico, monta contexto da conversa
     historic = get_last_messages(db)
+    contexto_historico = "\n".join([
+        f"Usuário: {msg.pergunta}\nAssistente: {msg.resposta}" for msg in historic
+    ])
 
-    # 🔗 Monta o contexto da conversa
-    contexto = "\n".join([f"Usuário: {msg.pergunta}\nAssistente: {msg.resposta}" for msg in historic])
-    pergunta_com_contexto = f"{contexto}\nUsuário: {pergunta}"
+    # 5) Combina tudo em uma pergunta com contexto adicional
+    pergunta_com_contexto = f"{contexto_historico}\n{extra_contexto}\nUsuário: {request.pergunta}"
 
     # 🔍 Envia a pergunta com contexto para a IA
+    assistant_id = 'asst_6FrcxlrCjmX5P4ovOIU2Fcwv'
     resposta = query_assistant(assistant_id, pergunta_com_contexto)
 
     # 💾 Salva a nova interação no banco
-    salvar_chat(db, pergunta, resposta)  # 📌 Agora usamos a função otimizada!
+    salvar_chat(db, request.pergunta, resposta)  # 📌 Agora usamos a função otimizada!
 
     return {"resposta": resposta}
 

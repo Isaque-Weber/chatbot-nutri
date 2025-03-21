@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Usuários Cadastrados</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Usuários Cadastrados</h1>
+  </header>
+  <main class="content">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Telefone</th>
+          <th>Autorizado</th>
+          <th>Comorbidade</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in usuarios %}
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.nome }}</td>
+          <td>{{ user.telefone }}</td>
+          <td>
+            {% if user.autorizado == 1 %}
+              Sim
+            {% else %}
+              Não
+            {% endif %}
+          </td>
+          <td>
+            {% if user.has_comorbidity == 1 %}
+              Sim
+            {% else %}
+              Não
+            {% endif %}
+          </td>
+          <td>
+            <!-- Link para editar -->
+            <form action="/admin/usuarios/editar/{{ user.id }}" method="get" style="display:inline;">
+              <button type="submit">Editar</button>
+            </form>
+            
+            <!-- Form para remover -->
+            <form action="/admin/usuarios/remover" method="post" style="display:inline;">
+              <input type="hidden" name="id" value="{{ user.id }}">
+              <button type="submit">Remover</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- Link para cadastrar novo usuário -->
+    <button type="button" onclick="window.location.href='/admin/usuarios/cadastrar'">Cadastrar novo usuário</button>
+  </main>
+</body>
+</html>
