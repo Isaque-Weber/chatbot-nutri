@@ -105,6 +105,40 @@ async function deleteUser(id) {
         alert('Erro ao excluir usuário.');
     }
 }
+// --- MODAL DE CADASTRO ---
+function openAddModal() {
+    document.getElementById('addModal').style.display = 'block';
+  }
+  function closeAddModal() {
+    document.getElementById('addModal').style.display = 'none';
+  }
 
+  // --- MODAL DE EDIÇÃO ---
+  function openEditModal(id, nome, telefone, autorizado, has_comorbidity) {
+    // Preenche os campos do form
+    document.getElementById('edit_id').value = id;
+    document.getElementById('edit_nome').value = nome;
+    document.getElementById('edit_telefone').value = telefone;
+    document.getElementById('edit_comorbidity').value = has_comorbidity;
+    document.getElementById('edit_autorizado').value = autorizado;
+
+    // Abre o modal
+    document.getElementById('editModal').style.display = 'block';
+  }
+  function closeEditModal() {
+    document.getElementById('editModal').style.display = 'none';
+  }
+
+  // Fecha modais se clicar fora do conteúdo
+  window.onclick = function(event) {
+    let addM = document.getElementById('addModal');
+    let editM = document.getElementById('editModal');
+    if (event.target == addM) {
+      addM.style.display = 'none';
+    }
+    if (event.target == editM) {
+      editM.style.display = 'none';
+    }
+  }
 // Carrega a lista de usuários ao carregar a página
 document.addEventListener('DOMContentLoaded', loadUsers);

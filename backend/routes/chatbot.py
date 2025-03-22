@@ -53,9 +53,11 @@ async def consultar_alimento(request: ConsultaRequest, db: Session = Depends(get
     # 3) Monta instruções extras se tiver comorbidade
     if possui_comorbidade:
         extra_contexto = (
-            "ATENÇÃO: Este usuário possui uma comorbidade. "
-            "Fornecer orientações alimentares mais cautelosas, "
-            "considerando possíveis restrições nutricionais."
+            "O usuário tem comorbidade (por exemplo, hipertensão ou diabetes). "
+            "Forneça sugestões de receitas e alimentos apropriados, "
+            "evitando altas quantidades de sódio, açúcar ou gorduras saturadas. "
+            "Se não for possível encontrar um alimento apropriado, "
+            "explique que a informação não está disponível na TACO."
         )
     else:
         extra_contexto = ""

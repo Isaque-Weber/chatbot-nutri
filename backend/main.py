@@ -15,7 +15,7 @@ def read_root():
     return {"message": "Bem-vindo ao servidor de Nutrição!"}
 
 # Montar arquivos estáticos
-app.mount("/chat/", StaticFiles(directory="static"), name="static")
+app.mount("/static/", StaticFiles(directory="static"), name="static")
 # Ou, se quiser manter /chat/ como prefixo, ok também.
 # app.mount("/chat", StaticFiles(directory="static"), name="static")
 

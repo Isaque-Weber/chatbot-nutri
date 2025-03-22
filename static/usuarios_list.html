@@ -43,7 +43,10 @@
           <td>
             <!-- Link para editar -->
             <form action="/admin/usuarios/editar/{{ user.id }}" method="get" style="display:inline;">
-              <button type="submit">Editar</button>
+                <button 
+                onclick="openEditModal('{{ user.id }}','{{ user.nome }}','{{ user.telefone }}','{{ user.autorizado }}','{{ user.has_comorbidity }}')">
+                Editar
+              </button>
             </form>
             
             <!-- Form para remover -->
@@ -58,7 +61,67 @@
     </table>
 
     <!-- Link para cadastrar novo usuário -->
-    <button type="button" onclick="window.location.href='/admin/usuarios/cadastrar'">Cadastrar novo usuário</button>
+    <button onclick="openAddModal()">Cadastrar novo usuário</button>
   </main>
+
+  <!-- MODAL DE CADASTRO -->
+  <div id="addModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeAddModal()">&times;</span>
+      <h2>Cadastrar Novo Usuário</h2>
+      <form action="/admin/usuarios/cadastrar" method="post">
+        <label>Nome:</label>
+        <input type="text" name="nome" required>
+
+        <label>Telefone:</label>
+        <input type="text" name="telefone" required>
+
+        <label>Possui Comorbidade?</label>
+        <select name="has_comorbidity">
+          <option value="0">Não</option>
+          <option value="1">Sim</option>
+        </select>
+
+        <label>Está autorizado?</label>
+        <select name="autorizado">
+          <option value="0">Não</option>
+          <option value="1">Sim</option>
+        </select>
+
+        <button type="submit">Salvar</button>
+      </form>
+    </div>
+  </div>
+  <!-- MODAL DE EDIÇÃO -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeEditModal()">&times;</span>
+      <h2>Editar Usuário</h2>
+      <form id="editForm" action="/admin/usuarios/editar" method="post">
+        <!-- Campo oculto para enviar o ID -->
+        <input type="hidden" name="id" id="edit_id">
+        
+        <label>Nome:</label>
+        <input type="text" name="nome" id="edit_nome" required>
+        
+        <label>Telefone:</label>
+        <input type="text" name="telefone" id="edit_telefone" required>
+        
+        <label>Possui Comorbidade?</label>
+        <select name="has_comorbidity" id="edit_comorbidity">
+          <option value="0">Não</option>
+          <option value="1">Sim</option>
+        </select>
+
+        <label>Está autorizado?</label>
+        <select name="autorizado" id="edit_autorizado">
+          <option value="0">Não</option>
+          <option value="1">Sim</option>
+        </select>
+
+        <button type="submit">Salvar</button>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
